@@ -1,0 +1,5 @@
+plugin.description: Send magnet links straight to rutorrent.
+plugin.author: Whatbox Inc.
+plugin.version: 1.0
+plugin.runlevel: 20
+plugin.help: https://github.com/whatbox/magnetic-rutorrent/issues
