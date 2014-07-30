@@ -12,17 +12,22 @@ var magnetic_cookies = document.cookie.split(": "),
 	i;
 
 
-if (typeof navigator.registerProtocolHandler === "undefined") {
+if (typeof navigator.isProtocolHandlerRegistered === "undefined") {
 	plugin.disable();
 }
 
 
 else {
-	navigator.registerProtocolHandler(
+	if (!navigator.isProtocolHandlerRegistered(
 		"magnet",
-		location.origin + location.pathname + "plugins/magnetic/adduri.php?uri=%s",
-		"ruTorrent (" + location.hostname + ")"
-	);
+		location.origin + location.pathname + "plugins/magnetic/adduri.php?uri=%s"
+	)) {
+		navigator.registerProtocolHandler(
+			"magnet",
+			location.origin + location.pathname + "plugins/magnetic/adduri.php?uri=%s",
+			"ruTorrent (" + location.hostname + ")"
+		);
+	}
 }
 
 for (i = 0; i < magnetic_cookies.length; i++) {
