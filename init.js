@@ -11,16 +11,19 @@ scope due to poor design decisions in rutorrent.
 var magnetic_cookies = document.cookie.split(": "),
 	i;
 
-
-if (typeof navigator.isProtocolHandlerRegistered === "undefined") {
+if (typeof navigator.registerProtocolHandler === "undefined") {
 	plugin.disable();
 }
 
 
 else {
-	if (!navigator.isProtocolHandlerRegistered(
-		"magnet",
-		location.origin + location.pathname + "plugins/magnetic/adduri.php?uri=%s"
+
+	if (!(
+		typeof navigator.isProtocolHandlerRegistered === 'function' && 
+		navigator.isProtocolHandlerRegistered(
+			"magnet",
+			location.origin + location.pathname + "plugins/magnetic/adduri.php?uri=%s"
+		)
 	)) {
 		navigator.registerProtocolHandler(
 			"magnet",
